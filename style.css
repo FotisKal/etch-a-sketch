@@ -14,3 +14,14 @@ body {
     display: flex;
     flex-wrap: wrap;
 }
+
+.container div {
+    width: 30px;
+    height: 30px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #f7941f;
+    flex: 1 1 auto;
+}
