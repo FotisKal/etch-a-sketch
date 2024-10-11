@@ -23,6 +23,8 @@ button.addEventListener('click', () => {
     do {
 		num = prompt();
 	} while (!validate(num));
+
+    replaceGrid(parent);
 });
 
 function commonMouseEventsHandler(e, parent) {
@@ -80,4 +82,14 @@ function populateNodesIn(type, x, y, parent) {
 */
 function validate(num) {
 	return parseInt(num);
+}
+
+function replaceGrid(grid) {
+    emptyGrid(grid);
+}
+
+function emptyGrid(grid) {
+    while (parent.lastElementChild) {
+		parent.removeChild(parent.lastElementChild);
+	}
 }
