@@ -6,6 +6,7 @@ const AXIS_X = 16;
 const AXIS_Y = 16;
 
 const parent = findOrCreateNodeIn('div', 'grid');
+const button = document.querySelector('.apply-size');
 populateNodesIn('div', AXIS_X, AXIS_Y, parent);
 
 parent.addEventListener('mouseover', (e) => {
@@ -14,6 +15,14 @@ parent.addEventListener('mouseover', (e) => {
 
 parent.addEventListener('mouseout', (e) => {
     commonMouseEventsHandler(e, parent);
+});
+
+button.addEventListener('click', () => {
+    let num;
+
+    do {
+		num = prompt();
+	} while (!validate(num));
 });
 
 function commonMouseEventsHandler(e, parent) {
@@ -64,4 +73,11 @@ function populateNodesIn(type, x, y, parent) {
 		const child = document.createElement(type);
 		parent.appendChild(child);
 	}
+}
+
+/*
+* Return falsy value if it's not a number
+*/
+function validate(num) {
+	return parseInt(num);
 }
