@@ -6,7 +6,8 @@ body {
     flex-direction: column;
 }
 
-.header {
+.header,
+.footer {
     display: flex;
     justify-content: space-between;
     padding: 16px;
@@ -61,4 +62,8 @@ a {
 
 .grid div.hovered {
     background-color: #8d8d8d;
+}
+
+.footer {
+    background: #eee;
 }
