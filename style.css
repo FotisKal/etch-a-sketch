@@ -1,11 +1,38 @@
 body {
     height: 100vh;
+    font-family: Roboto, sans-serif;
+    overflow: hidden;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+}
+
+ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 16px
+}
+
+a {
+    color: #666;
+    text-decoration: none;
 }
 
 .container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.grid {
     width: 480px;
     height: 480px;
     border-width: 1px;
@@ -13,9 +40,11 @@ body {
     border-color: #1f2937;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }
 
-.container div {
+.grid div {
     width: 30px;
     height: 30px;
     box-sizing: border-box;
@@ -26,10 +55,10 @@ body {
     flex: 1 1 auto;
 }
 
-.container div.hovering {
+.grid div.hovering {
     background-color: #d3d3d3;
 }
 
-.container div.hovered {
+.grid div.hovered {
     background-color: #8d8d8d;
 }

@@ -5,7 +5,7 @@ const CSS_HOVERED_CLASS = 'hovered';
 const AXIS_X = 16;
 const AXIS_Y = 16;
 
-const parent = findOrCreateNodeIn('div', 'container');
+const parent = findOrCreateNodeIn('div', 'grid');
 populateNodesIn('div', AXIS_X, AXIS_Y, parent);
 
 parent.addEventListener('mouseover', (e) => {
