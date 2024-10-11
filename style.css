@@ -25,3 +25,11 @@ body {
     border-color: #f7941f;
     flex: 1 1 auto;
 }
+
+.container div.hovering {
+    background-color: #d3d3d3;
+}
+
+.container div.hovered {
+    background-color: #8d8d8d;
+}

@@ -1,10 +1,41 @@
 "use strict";
 
+const CSS_HOVERING_CLASS = 'hovering';
+const CSS_HOVERED_CLASS = 'hovered';
 const AXIS_X = 16;
 const AXIS_Y = 16;
 
 const parent = findOrCreateNodeIn('div', 'container');
 populateNodesIn('div', AXIS_X, AXIS_Y, parent);
+
+parent.addEventListener('mouseover', (e) => {
+    commonMouseEventsHandler(e, parent);
+});
+
+parent.addEventListener('mouseout', (e) => {
+    commonMouseEventsHandler(e, parent);
+});
+
+function commonMouseEventsHandler(e, parent) {
+    if (e.target.className === CSS_HOVERED_CLASS) {
+        return;
+    }
+
+    if (e.target.className === parent.className) {
+        return;
+    }
+        
+    if (e.type === 'mouseover') {
+            e.target.classList.add(CSS_HOVERING_CLASS);
+            return;
+    }
+
+    if (e.type === 'mouseout') {
+        e.target.classList.remove(CSS_HOVERING_CLASS);
+        e.target.classList.add(CSS_HOVERED_CLASS);
+        return;
+    }
+}
 
 function findOrCreateNodeIn(type, className, classOfParent) {
 	let node = document.querySelector(`.${className}`);
