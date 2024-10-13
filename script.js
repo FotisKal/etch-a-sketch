@@ -2,11 +2,13 @@
 
 const CSS_HOVERING_CLASS = 'hovering';
 const CSS_HOVERED_CLASS = 'hovered';
+const CSS_FLEXITEM_SELECTOR = '.grid div'
+const CSS_APPLY_SIZE_BTN_SELECTOR = '.apply-size'
 const AXIS_X = 16;
 const AXIS_Y = 16;
 
 const parent = findOrCreateNodeIn('div', 'grid');
-const button = document.querySelector('.apply-size');
+const button = document.querySelector(CSS_APPLY_SIZE_BTN_SELECTOR);
 populateNodesIn('div', AXIS_X, AXIS_Y, parent);
 
 parent.addEventListener('mouseover', (e) => {
@@ -18,13 +20,20 @@ parent.addEventListener('mouseout', (e) => {
 });
 
 button.addEventListener('click', () => {
-    let num;
+    let gridSize;
 
     do {
-		num = prompt();
-	} while (!validate(num));
+		gridSize = prompt();
 
-    replaceGrid(parent);
+        /**
+         * If cancel button be pressed
+         */
+        if (gridSize === null) {
+            return;
+        }
+	} while (!validate(gridSize));
+
+    replaceGrid(parent, gridSize);
 });
 
 function commonMouseEventsHandler(e, parent) {
@@ -81,15 +90,56 @@ function populateNodesIn(type, x, y, parent) {
 * Return falsy value if it's not a number
 */
 function validate(num) {
-	return parseInt(num);
+    num = parseInt(num);
+
+    if (num > 100) {
+        return false;
+    }
+
+	return num;
 }
 
-function replaceGrid(grid) {
+function replaceGrid(grid, size) {
     emptyGrid(grid);
+    createGrid(grid, size);
 }
 
 function emptyGrid(grid) {
-    while (parent.lastElementChild) {
-		parent.removeChild(parent.lastElementChild);
+    while (grid.lastElementChild) {
+		grid.removeChild(grid.lastElementChild);
 	}
+}
+
+function createGrid(grid, size) {
+    let flexItemWidth = calculateFlexItemWidth(grid, size);
+    setStyle(CSS_FLEXITEM_SELECTOR, 'width', `${flexItemWidth}px`);
+    setStyle(CSS_FLEXITEM_SELECTOR, 'height', `${flexItemWidth}px`);
+    populateNodesIn('div', size, size, grid);
+}
+
+function calculateFlexItemWidth(parent, num) {
+    const style = window.getComputedStyle(parent);
+    const containerWidth = parseInt(style.getPropertyValue('width'));
+	return containerWidth / num;
+}
+
+function setStyle(selector, property, value) {
+    let ruleNum;
+    let sheet = document.styleSheets[0];
+    let rules = sheet.cssRules;
+    
+    for (let i = 0; i < rules.length; i++) {
+        if (rules[i].selectorText === selector) {
+            ruleNum = i;
+            break;
+        }
+    }
+
+    if (property === 'width') {
+        rules[ruleNum].style.width = value;
+    }
+
+    if (property === 'height') {
+        rules[ruleNum].style.height = value;
+    }
 }
